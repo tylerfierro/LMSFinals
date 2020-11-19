@@ -377,7 +377,9 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -447,15 +449,34 @@
     <Content Include="_Archive\Mentor\assets\vendor\remixicon\remixicon.woff" />
     <Content Include="_Archive\Mentor\assets\vendor\remixicon\remixicon.woff2" />
     <Content Include="Views\Shared\_OriginalLayout.cshtml" />
+    <Content Include="Views\Lessons\Index.cshtml" />
+    <Content Include="Views\Lessons\Create.cshtml" />
+    <Content Include="Views\Lessons\Delete.cshtml" />
+    <Content Include="Views\Lessons\Details.cshtml" />
+    <Content Include="Views\Lessons\Edit.cshtml" />
+    <Content Include="Views\CourseCompletions\Create.cshtml" />
+    <Content Include="Views\CourseCompletions\Delete.cshtml" />
+    <Content Include="Views\CourseCompletions\Details.cshtml" />
+    <Content Include="Views\CourseCompletions\Edit.cshtml" />
+    <Content Include="Views\CourseCompletions\Index.cshtml" />
+    <Content Include="Views\UserDetails\Create.cshtml" />
+    <Content Include="Views\UserDetails\Delete.cshtml" />
+    <Content Include="Views\UserDetails\Details.cshtml" />
+    <Content Include="Views\UserDetails\Edit.cshtml" />
+    <Content Include="Views\UserDetails\Index.cshtml" />
+    <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\LessonViews\Create.cshtml" />
+    <Content Include="Views\LessonViews\Delete.cshtml" />
+    <Content Include="Views\LessonViews\Details.cshtml" />
+    <Content Include="Views\LessonViews\Edit.cshtml" />
+    <Content Include="Views\LessonViews\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CourseCompletions\" />
-    <Folder Include="Views\Courses\" />
-    <Folder Include="Views\Employees\" />
-    <Folder Include="Views\Lessons\" />
-    <Folder Include="Views\LessonViews\" />
-    <Folder Include="Views\UserDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
