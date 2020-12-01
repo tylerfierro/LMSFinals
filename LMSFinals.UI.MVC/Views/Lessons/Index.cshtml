@@ -9,55 +9,96 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Lesson
-        </th>
-        <th>
-            Intro
-        </th>
-        <th>
-            Video
-        </th>
-        <th>
-            PDF File
-        </th>
-        <th>
-            Is Active
-        </th>
-        <th>
-            Course
-        </th>
-        <th></th>
-    </tr>
+<table class="table" id="datatable">
+    <thead>
+        <tr>
+            <th>
+                Lesson
+            </th>
+            <th>
+                Intro
+            </th>
+            <th>
+                Video
+            </th>
+            <th>
+                PDF File
+            </th>
+            <th>
+                Is Active
+            </th>
+            <th>
+                Course
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LessonName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Intro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Video)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PdfFilename)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Course.CourseName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LessonId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LessonId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LessonId })
-        </td>
-    </tr>
-}
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LessonName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Intro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Video)
+                @using (Html.BeginForm("Index",
+                                        "Home",
+                                        FormMethod.Post,
+                                        new { enctype = "multipart/form-data" }))
+                {
+                    <label for="file">Upload File:</label>
+                    <input type="file" name="file" id="file" /><br />
+                    <input type="submit" value="Upload File" />
+                    <br />
+                    @ViewBag.Message
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PdfFilename)
+                @using (Html.BeginForm("Index",
+                                        "Home",
+                                        FormMethod.Post,
+                                        new { enctype = "multipart/form-data" }))
+                {
+                    <label for="file">Upload File:</label>
+                    <input type="file" name="file" id="file" /><br />
+                    <input type="submit" value="Upload File" />
+                    <br />
+                    @ViewBag.Message
+                }
+            </td>
+            @*<td>
+            <h2>File Upload</h2>
+            @using (Html.BeginForm("Index",
+                                    "Home",
+                                    FormMethod.Post,
+                                    new { enctype = "multipart/form-data" }))
+            {
+                <label for="file">Upload File:</label>
+                <input type="file" name="file" id="file" /><br />
+                <input type="submit" value="Upload File" />
+                <br />
+                @ViewBag.Message
+            }
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.CourseName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.LessonId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.LessonId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.LessonId })
+            </td>
+        </tr>
+        }
+    </tbody>
 
 </table>

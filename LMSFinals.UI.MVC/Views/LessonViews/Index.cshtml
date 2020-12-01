@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<LMSFinals.DATA.EF.LessonView>
 
 @{
-    ViewBag.Title = "Lessons Viewed";
+    ViewBag.Title = "Viewing";
 }
 
 <h1 style="text-align:center">@ViewBag.Title</h1>
@@ -9,37 +9,41 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Date Viewed
-        </th>
-        <th>
-            Lesson
-        </th>
-        <th>
-            First Name
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateViewed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lesson.LessonName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LessonViewId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LessonViewId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LessonViewId })
-        </td>
-    </tr>
-}
+<table class="table" id="datatable">
+    <thead>
+        <tr>
+            <th>
+                Date Viewed
+            </th>
+            <th>
+                Lesson
+            </th>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateViewed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lesson.LessonName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserDetail.FirstName) @Html.DisplayFor(modelItem => item.UserDetail.LastName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.LessonViewId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.LessonViewId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.LessonViewId })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
