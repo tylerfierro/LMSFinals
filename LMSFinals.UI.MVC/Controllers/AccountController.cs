@@ -1,4 +1,5 @@
-﻿using LMSFinals.UI.MVC.Models;
+﻿using LMSFinals.DATA.EF;
+using LMSFinals.UI.MVC.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -153,11 +154,18 @@ namespace LMSFinals.UI.MVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    #region Dealing with custom user details
+                    UserDetail newUserDetail = new UserDetail();
+                    newUserDetail.UserId = user.Id;
+                    newUserDetail.FirstName = model.FirstName;
+                    newUserDetail.LastName = model.LastName;
+
+                    LMSProjectEntities db = new LMSProjectEntities();
+                    db.UserDetails.Add(newUserDetail);
+                    db.SaveChanges();
+                    #endregion
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

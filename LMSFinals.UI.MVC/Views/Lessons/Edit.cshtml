@@ -7,7 +7,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Recipients", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -16,6 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.LessonId)
+        @Html.HiddenFor(model => model.PdfFilename)
 
         <div class="form-group">
             @Html.LabelFor(model => model.LessonName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -52,8 +53,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PdfFilename, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PdfFilename, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PdfFilename, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.PdfFilename, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PdfFilename, "", new { @class = "text-danger" })*@
+                <img width="150" src="@Url.Content("~/Content/assets/img/"+Model.PdfFilename)" /><br /><br />
+                <input type="file" style="display:inline" name="ImageFile" />
             </div>
         </div>
 

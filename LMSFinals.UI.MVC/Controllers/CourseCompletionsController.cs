@@ -18,10 +18,22 @@ namespace LMSFinals.UI.MVC.Controllers
         // GET: CourseCompletions
         public ActionResult Index()
         {
-            var lessonViews = db.LessonViews.Include(l => l.Lesson).Include(l => l.UserDetail);
+            var CourseViews = db.CourseCompletions.Include(l => l.Course).Include(l => l.UserDetail);
 
-            string currentUserID = User.Identity.GetUserId();            if (User.IsInRole("Admin") || User.IsInRole("Manager"))            {                return View(lessonViews.ToList());            }            else if (User.IsInRole("Employee"))            {                var employeeViews = db.LessonViews.Where(x => x.UserId == currentUserID).Include(a => a.UserDetail);                return View(employeeViews.ToList());            }            else            {
-                return RedirectToAction("Index", "Home");            }
+            string currentUserID = User.Identity.GetUserId();
+            if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+            {
+                return View(CourseViews.ToList());
+            }
+            else if (User.IsInRole("Employee"))
+            {
+                var employeeViews = db.CourseCompletions.Where(x => x.UserId == currentUserID).Include(a => a.UserDetail);
+                return View(employeeViews.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: CourseCompletions/Details/5
@@ -37,17 +49,6 @@ namespace LMSFinals.UI.MVC.Controllers
                 return HttpNotFound();
             }
             return View(courseCompletion);
-        }
-
-        // Post: CourseCompletions/Completion
-        public ActionResult CompletionCourse()
-        {
-            // if (if the course is completed then I want the submit button from the user to send me an email to tell me what course was completed and who completed it.) 
-            //if()
-            //{
-            //}
-
-            return View();
         }
 
         // GET: CourseCompletions/Create

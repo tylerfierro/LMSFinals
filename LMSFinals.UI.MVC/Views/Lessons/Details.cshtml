@@ -32,6 +32,55 @@
 
         <dd>
             @Html.DisplayFor(model => model.Video)
+            <div id="player">
+            </div>
+            <script src="http://www.youtube.com/player_api"></script>
+            <script>
+                            // create youtube player
+                        var player;
+                        var h = @ViewBag.height;
+                        var w = @ViewBag.width;
+                        function onYouTubePlayerAPIReady()
+                        {
+                        player = new YT.Player('player', {
+                        height: 360,
+                        width: 640,
+                        modestbranding: 1,
+                        videoId: @ViewBag.VideoID,
+                        playerVars:
+                        {
+                        rel: 0,
+                        autoplay: 0,
+                        disablekb: 0,
+                        showsearch: 0,
+                        showinfo: 0,
+                        controls: 1,
+                        fs: 1,
+                        hd: 1,
+                        html5: 1,
+                        iv_load_policy: 3
+                        },
+                        events:
+                        {
+                        onReady: onPlayerReady,
+                        onStateChange: onPlayerStateChange
+                        }
+                        });
+                        }
+                        // autoplay video
+                        function onPlayerReady(event)
+                        {
+                        event.target.playVideo();
+                        }
+
+                        // when video ends
+                        function onPlayerStateChange(event)
+                        {
+                        if (event.data === 0) {
+                        //do something on end;
+                        alert('done');
+                        }
+            </script>
         </dd>
 
         <dt>
@@ -39,7 +88,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PdfFilename)
+            @*@Html.DisplayFor(model => model.PdfFilename)*@
+            <img src="~/Content/assets/img/@Model.PdfFilename" alt="@Model.PdfFilename" />
         </dd>
 
         <dt>
@@ -51,11 +101,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Cours.CourseName)
+            @Html.DisplayNameFor(model => model.Course.CourseName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Cours.CourseName)
+            @Html.DisplayFor(model => model.Course.CourseName)
         </dd>
 
     </dl>

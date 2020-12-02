@@ -288,6 +288,7 @@
     <Content Include="Content\assets\vendor\remixicon\remixicon.ttf" />
     <Content Include="Content\assets\vendor\remixicon\remixicon.woff" />
     <Content Include="Content\assets\vendor\remixicon\remixicon.woff2" />
+    <Content Include="Content\assets\img\LEADERSHIP_DEVELOPMENT_A_REVIEW_IN_CONTE.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

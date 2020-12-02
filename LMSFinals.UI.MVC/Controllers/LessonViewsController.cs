@@ -21,8 +21,20 @@ namespace LMSFinals.UI.MVC.Controllers
         {
             var lessonViews = db.LessonViews.Include(l => l.Lesson).Include(l => l.UserDetail);
 
-            string currentUserID = User.Identity.GetUserId();            if (User.IsInRole("Admin") || User.IsInRole("Manager"))            {                return View(lessonViews.ToList());            }            else if (User.IsInRole("Employee"))            {                var employeeViews = db.LessonViews.Where(x => x.UserId == currentUserID).Include(a => a.UserDetail);                return View(employeeViews.ToList());            }            else            {
-                return RedirectToAction("Index", "Home");            }
+            string currentUserID = User.Identity.GetUserId();
+            if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+            {
+                return View(lessonViews.ToList());
+            }
+            else if (User.IsInRole("Employee"))
+            {
+                var employeeViews = db.LessonViews.Where(x => x.UserId == currentUserID).Include(a => a.UserDetail);
+                return View(employeeViews.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: LessonViews/Details/5
@@ -39,29 +51,6 @@ namespace LMSFinals.UI.MVC.Controllers
             }
             return View(lessonView);
         }
-
-        // Post: LessonViews/Completion
-        public ActionResult CompletionLesson()
-        {
-            // if (if the lesson is completed then I want the submit button from the user to send me an email to tell me what lesson was completed and who completed it.) 
-            int lessonCount = 0;
-            string currentUserID = User.Identity.GetUserId();
-            //var currentLesson = this.db.Lessons.LessonId
-            if (lessonCount < 1)
-            {
-                lessonCount++;
-                ViewBag.CompleteMessage = "You've completed this lesson! Good Job!";
-                string body = $"{currentUserID} has completed the following lesson: a lesson";
-                MailMessage m = new MailMessage("no-reply@tylerfierro.net", "tmfierro@outlook.com");
-                m.IsBodyHtml = true;
-                m.Priority = MailPriority.High;
-                SmtpClient client = new SmtpClient("mail.tylerfierro.net");
-                client.Credentials = new NetworkCredential("no-reply@tylerfierro.net", "Grapes123!");
-                client.Port = 8889;
-            }
-            return View(currentUserID.ToList());
-        }
-
 
         // GET: LessonViews/Create
         [Authorize(Roles = "Admin , Manager")]
