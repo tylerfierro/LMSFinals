@@ -9,6 +9,12 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@if (ViewBag.CompleteMessage != null)
+{
+    <p>
+        @ViewBag.CompleteMessage()
+    </p>
+}
 <table class="table" id="datatable">
     <thead>
         <tr>
@@ -40,7 +46,9 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.LessonViewId }) |
                     @Html.ActionLink("Details", "Details", new { id = item.LessonViewId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.LessonViewId })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.LessonViewId }) |
+
+                    <button type="submit" class="btn btn-default" onclick="@Url.Action("CompletionLesson", "LessonViewsController")">Submit Lesson</button>
                 </td>
             </tr>
         }

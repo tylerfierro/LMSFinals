@@ -12,13 +12,16 @@ namespace LMSFinals.UI.MVC.Models
         [Required(ErrorMessage = "* A name is required.")]
         public string Name { get; set; }
 
-        [Required, Display(Name = "Your email"), EmailAddress]
+        [Required, Display(Name = "Your email")]
+        [EmailAddress]
         public string Email { get; set; }
         public string Subject { get; set; }
 
         [Required(ErrorMessage = "* A message is required.")]
         [UIHint("MultilineText")]
         public string Message { get; set; }
+
+        public HttpPostedFileBase Upload { get; set; }
 
     }
 }

@@ -3,6 +3,8 @@ using System.Net;
 using System.Net.Mail;
 using LMSFinals.UI.MVC.Models;
 using System.Threading.Tasks;
+using System.IO;
+using System;
 
 namespace LMSFinals.UI.MVC.Controllers
 {
@@ -26,41 +28,35 @@ namespace LMSFinals.UI.MVC.Controllers
         [HttpGet]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Contact(ContactViewModel model)
+        public ActionResult Contact(ContactViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
-                var message = new MailMessage();
-                message.To.Add(new MailAddress("tmfierro@outlook.com"));
-                message.From = new MailAddress("IAmAdmin@exampl.com");
-                message.Subject = "Your email subject";
-                message.Body = string.Format(body, model.Name, model.Email, model.Message);
-                message.IsBodyHtml = true;
-
-                using (var smtp = new SmtpClient())
-                {
-                    var credential = new NetworkCredential
-                    {
-                        UserName = "tmfierro@outlook.com",
-                        Password = ""
-                    };
-                    smtp.Credentials = credential;
-                    smtp.Host = "";
-                    smtp.Port = 587;
-                    smtp.EnableSsl = true;
-                    await smtp.SendMailAsync(message);
-                    return RedirectToAction("Sent");
-                }
+                return View(model);
             }
-            return View(model);
+            string body = $"{model.Name} has sent you the following message: <br />" + $"{model.Message} <strong>from the email address:</strong> {model.Email}";
+            MailMessage m = new MailMessage("no-reply@tylerfierro.net", "tmfierro@outlook.com", model.Subject, body);
+            m.IsBodyHtml = true;
+            m.Priority = MailPriority.High;
+            m.ReplyToList.Add(model.Email);
+            SmtpClient client = new SmtpClient("mail.tylerfierro.net");
+            client.Credentials = new NetworkCredential("no-reply@tylerfierro.net", "Grapes123!");
+            client.Port = 8889;
+            try
+            {
+                client.Send(m);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message = e.StackTrace;
+            }
+            return View("EmailConfirmation", model);
         }
 
         public ActionResult Sent()

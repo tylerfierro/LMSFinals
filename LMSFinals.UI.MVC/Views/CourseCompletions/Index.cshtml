@@ -9,37 +9,43 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Date Completed
-        </th>
-        <th>
-            Course
-        </th>
-        <th>
-            Name
-        </th>
-        <th></th>
-    </tr>
+<table class="table" id="datatable">
+    <thead>
+        <tr>
+            <th>
+                Date Completed
+            </th>
+            <th>
+                Course
+            </th>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCompleted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Course.CourseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserDetail.FirstName) @Html.DisplayFor(modelItem => item.UserDetail.LastName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CourseCompletionId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CourseCompletionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CourseCompletionId })
-        </td>
-    </tr>
-}
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCompleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserDetail.FirstName) @Html.DisplayFor(modelItem => item.UserDetail.LastName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CourseCompletionId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CourseCompletionId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CourseCompletionId })
+                    @*<input type="submit" style="text-align:center" value="Submit Course" class="btn btn-default" onclick="CompletionCourse()"/>*@
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>

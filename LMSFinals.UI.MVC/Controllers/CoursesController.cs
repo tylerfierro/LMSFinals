@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LMSFinals.DATA.EF;
+using Microsoft.AspNet.Identity;
 
 namespace LMSFinals.UI.MVC.Controllers
 {
@@ -17,7 +18,22 @@ namespace LMSFinals.UI.MVC.Controllers
         // GET: Courses
         public ActionResult Index()
         {
-            return View(db.Courses.ToList());
+            var lessonViews = db.LessonViews.Include(l => l.Lesson).Include(l => l.UserDetail);
+
+            string currentUserID = User.Identity.GetUserId();
+            if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+            {
+                return View(lessonViews.ToList());
+            }
+            else if (User.IsInRole("Employee"))
+            {
+                var employeeViews = db.LessonViews.Where(x => x.UserId == currentUserID).Include(a => a.UserDetail);
+                return View(employeeViews.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Courses/Details/5
