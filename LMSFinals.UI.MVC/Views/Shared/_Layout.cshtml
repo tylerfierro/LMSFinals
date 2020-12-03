@@ -63,6 +63,10 @@
                     {
                         <li>@Html.ActionLink("Users", "Index", "UserDetails")</li>
                     }
+                    @if ((User.IsInRole("Admin") && Request.IsAuthenticated))
+                    {
+                        <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
+                    }
                     <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
             </nav>

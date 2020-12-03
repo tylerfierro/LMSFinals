@@ -210,6 +210,7 @@
     <Content Include="Content\assets\img\testimonials\testimonials-3.jpg" />
     <Content Include="Content\assets\img\testimonials\testimonials-4.jpg" />
     <Content Include="Content\assets\img\testimonials\testimonials-5.jpg" />
+    <Content Include="Content\assets\img\SmartWorkplace.png" />
     <Content Include="Content\assets\img\trainers\trainer-1.jpg" />
     <Content Include="Content\assets\img\trainers\trainer-2.jpg" />
     <Content Include="Content\assets\img\trainers\trainer-3.jpg" />
@@ -289,6 +290,7 @@
     <Content Include="Content\assets\vendor\remixicon\remixicon.woff" />
     <Content Include="Content\assets\vendor\remixicon\remixicon.woff2" />
     <Content Include="Content\assets\img\LEADERSHIP_DEVELOPMENT_A_REVIEW_IN_CONTE.pdf" />
+    <Content Include="Content\TylerFierroDocumentation.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
